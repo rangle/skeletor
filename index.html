@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>Skeletor: the sassy skeleton</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic|Montserrat:400,700" rel="stylesheet" type="text/css">
+  <!-- styles -->
+  <link rel="stylesheet" href="css/skeletor.min.css">
+  <link rel="stylesheet" href="css/docs.css">
+  <link rel="stylesheet" href="http://getskeleton.com/css/github-prettify-theme.css">
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body class="code-snippets-visible">
+
+  <!-- Primary Page Layout -->
+  <div class="container">
+
+    <section class="header">
+      <img class="logo" src="img/skeletor.png" alt="Skeletor Logo">
+      <h2 class="title">Skeletor: The Sassy Skeleton</h2>
+    </section>
+
+    <!-- 12 Column Grid -->
+<div class="docs-section" id="grid">
+  <h6 class="docs-header">The 12 column grid</h6>
+  <p>The grid is a <u>12-column fluid grid with a max width of 960px</u>, that shrinks with the browser/device at smaller sizes. The max width can be changed with one line of CSS and all columns will resize accordingly. The syntax is simple and it makes coding responsive websites much easier. Go ahead, resize the browser. </p>
+  <div class="example-grid docs-example">
+    <div class="row">
+      <div class="two columns">Two</div>
+      <div class="seven columns">Seven</div>
+      <div class="three columns">Three</div>
+    </div>
+    <div class="row">
+      <div class="one-third column">One-Third</div>
+      <div class="two-thirds column">Two-Thirds</div>
+    </div>
+    <div class="row">
+      <div class="offset-by-three nine columns">
+        Nine <em>offset-by-three</em>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        Twelve
+      </div>
+    </div>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><!-- .container is the main centered wrapper -->
+<div class="container">
+
+  <!-- columns should be the immediate child of a .row -->
+  <div class="row">
+    <div class="one column">One</div>
+    <div class="eleven columns">Eleven</div>
+  </div>
+
+  <!-- just use a number and class 'column' or 'columns' -->
+  <div class="row">
+    <div class="two columns">Two</div>
+    <div class="ten columns">Ten</div>
+  </div>
+
+  <!-- there are a few shorthand columns widths as well -->
+  <div class="row">
+    <div class="one-third column">1/3</div>
+    <div class="two-thirds column">2/3</div>
+  </div>
+  <div class="row">
+    <div class="one-half column">1/2</div>
+    <div class="one-half column">1/2</div>
+  </div>
+
+</div>
+
+<!-- Note: columns can be nested but it's not recommended since Skeletor's grid has %-based gutters – meaning a nested grid results in variably increasing gutter widths (i.e. columns can end up being *really* small on certain browser/device sizes) -->
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+
+    <!-- Grid Mixins -->
+<div class="docs-section" id="grid-mixins">
+  <h6 class="docs-header">Grid Mixins</h6>
+  <p>While the <strong>12 Column Grid</strong> classes are available, it is recommended that you use the mixins instead. Use of pre&#8209;calculated grid classes leads to the presence of numerous non-semantic class names throughout a document such as <code>row</code>, <code>column</code>, etc. Using the mixin keeps the markup clean and allows you to use appropriate semantic tags such as <code>main</code>, <code>section</code> and <code>aside</code> instead.</p>
+
+<div class="main">
+  <div class="section"> Blog Posts </div>
+  <div class="aside"> Sidebar </div>
+</div>
+</code>
+
+<div class="row">
+<!-- Code Example -->
+<pre class="code-example six columns">
+<code class="code-example-body prettyprint">/* Two column (blog style) layout */
+main {
+  @include row;
+}
+/* 8 Column div for the blog posts */
+section {
+  @include col(8);
+}
+/* 4 Column div for the side-bar */
+aside {
+  @include col(4);
+}
+</code>
+</pre>
+<!-- END Code Example -->
+<!-- Code Example -->
+<pre class="code-example six columns">
+<code class="code-example-body prettyprint"><!-- Cleaner markup -->
+<main>
+  <section> ... </section>
+  <aside> ... </aside>
+</main>
+</code>
+</pre>
+<!-- END Code Example -->
+</div>
+
+
+</div>
+
+    <!-- Flexbox Mixins -->
+<div class="docs-section" id="grid-flex">
+  <h6 class="docs-header">Flexbox Mixins</h6>
+  <p>The Flexbox Layout module provides a more efficient way to construct layouts. The core idea behind it is to allow the container to alter the width, height and order of it's child elements to maintain the expected layout. That is, the container can expand items to fill the available space or shrink them to prevent overflow.</p>
+
+  <ul>See the links below for a more information:
+    <li>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes" target="_blank">Using CSS flexible boxes</a>
+    </li>
+    <li>
+      <a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background" target="_blank">A Complete Guide to Flexbox</a>
+    </li>
+    <li>
+      <a href="http://chriswrightdesign.com/experiments/flexbox-adventures" target="_blank">Flexbox adventures</a>
+    </li>
+  </ul>
+
+  <p>Bourbon provides an exhaustive set of <a href="https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/css3/_flex-box.scss" target="_blank">flexbox mixins</a>. Below are a few examples which demonstrate how to use these mixins:</p>
+
+  <div class="example-grid docs-example">
+    <div class="flex-row">
+      <div class="flex-row__col">
+        <div class="col-demo">Flex Column</div>
+      </div>
+      <div class="flex-row__col">
+        <div class="col-demo">Flex Column</div>
+      </div>
+      <div class="flex-row__col">
+        <div class="col-demo">Flex Column</div>
+      </div>
+    </div>
+  </div>
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint">/* This is an example of a basic grid layout */
+
+/* A row container */
+.flex-row {
+  @include display(flex);
+  width: 100%;
+}
+/* Clearfix */
+.flex-row:before,
+.flex-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Flexible column */
+.flex-row__col {
+  @include flex(1);
+  display: block;
+  width: 100%;
+}
+/* Columns with initial sizing */
+.flex-row__col--25 {
+  @include flex(0);
+  @include flex-basis(25%);
+  max-width: 25%;
+}
+.flex-row__col--fixed {
+  @include flex(0);
+  @include flex-basis(250px);
+  max-width: 250px;
+}
+</code>
+</pre>
+<!-- END Code Example -->
+  <div class="example-grid docs-example">
+    <div class="flex-row">
+      <div class="flex-row__col--top">
+        <div class="col-demo">Flex Column Top</div>
+      </div>
+      <div class="flex-row__col--center">
+        <div class="col-demo">Flex Column Center</div>
+      </div>
+      <div class="flex-row__col--bottom">
+        <div class="col-demo">Flex Column Bottom</div>
+      </div>
+      <div class="flex-row__col">
+        <div class="col-demo">
+          1<br/>2<br/>3<br/>4
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint">/* Alignment example */
+
+/* .flex-row__col-* vertically aligns an individual .flex-row__col */
+.flex-row__col--top {
+  @extend .flex-row__col;
+  @include align-self(flex-start);
+}
+.flex-row__col--center {
+  @extend .flex-row__col;
+  @include align-self(center);
+}
+.flex-row__col--bottom {
+  @extend .flex-row__col;
+  @include align-self(flex-end);
+}
+
+/* Offset columns */
+.flex-row__col--offset-25 {
+  margin-left: 25%;
+}
+.flex-row__col--offset-33 {
+  margin-left: 33.3333%;
+}
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+
+    <!-- Typography -->
+<div class="docs-section" id="typography">
+  <h6 class="docs-header">Typography</h6>
+  <p>All type is set in <code>rems</code> so that font-sizes and spacial relationships can be responsively sized based on a single <code>&lt;html&gt;</code> font-size property. Out of the box, Skeletor never changes the <code>&lt;html&gt;</code> font-size, but the ability to do so is there in case you need it for your project. All measurements are still base 10 though so an <code>&lt;h1&gt;</code> with <code>5.0rem</code>font-size just means <code>50px</code>.</p>
+  <div class="docs-example">
+    <div class="row">
+      <div class="six columns">
+      <p><strong>The typography base</strong> is <em id="body-font"></em>. Other type basics like <a href="#">anchors</a>, <strong>strong</strong>, <em>emphasis</em>, and <u>underline</u> are all obviously included.</p>
+        <p><strong>Headings</strong> create a family of distinct sizes, each with specific <code>letter-spacing</code>, <code>line-height</code>, and <code>margins</code>. They are set in <em id="heading-font"></em>.</p>
+      </div>
+      <div class="six columns">
+        <h1>Heading
+          <span class="heading-font-size">
+            <code>&lt;h1&gt;</code> <span id="h1-size"></span>
+          </span>
+        </h1>
+        <h2>Heading
+          <span class="heading-font-size">
+            <code>&lt;h2&gt;</code> <span id="h2-size"></span>
+          </span>
+        </h2>
+        <h3>Heading
+          <span class="heading-font-size">
+            <code>&lt;h3&gt;</code> <span id="h3-size"></span>
+          </span>
+        </h3>
+        <h4>Heading
+          <span class="heading-font-size">
+            <code>&lt;h4&gt;</code> <span id="h4-size"></span>
+          </span>
+        </h4>
+        <h5>Heading
+          <span class="heading-font-size">
+            <code>&lt;h5&gt;</code> <span id="h5-size"></span>
+          </span>
+        </h5>
+        <h6>Heading
+          <span class="heading-font-size">
+            <code>&lt;h6&gt;</code> <span id="h6-size"></span>
+          </span>
+        </h6>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><!-- Standard Headings -->
+<h1>Heading</h1>
+<h2>Heading</h2>
+<h3>Heading</h3>
+<h4>Heading</h4>
+<h5>Heading</h5>
+<h6>Heading</h6>
+
+<!-- Base type size -->
+<p>The base type is 15px over 1.6 line height (24px)</p>
+
+<!-- Other styled text tags -->
+<strong>Bolded</strong>
+<em>Italicized</em>
+<a>Colored</a>
+<u>Underlined</u>
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+
+    <!-- Buttons -->
+<div class="docs-section" id="buttons">
+  <h6 class="docs-header">Buttons</h6>
+  <p>Buttons, in Skeletor, come in two basic flavors. The standard <code>&lt;button&gt;</code> element is plain whereas the <code>.btn--primary</code> button is vibrant and prominent. Button styles are automatically applied to a number of appropriate form elements but can also be arbitrarily attached to anchors with the use of a <code>.btn</code> class.</p>
+  <div class="docs-example u-text-center">
+    <div>
+      <a class="btn" href="#">Anchor button</a>
+      <button>Button element</button>
+      <input class="btn" type="submit" value="submit input">
+      <input class="btn" type="button" value="button input">
+    </div>
+    <div>
+      <a class="btn--primary" href="#">Anchor button</a>
+      <button class="btn--primary">Button element</button>
+      <input class="btn--primary" type="submit" value="submit input">
+      <input class="btn--primary" type="button" value="button input">
+    </div>
+    <div>
+      <a class="btn--success" href="#">Anchor button</a>
+      <button class="btn--success">Button element</button>
+      <input class="btn--success" type="submit" value="submit input">
+      <input class="btn--success" type="button" value="button input">
+    </div>
+    <div>
+      <a class="btn--danger" href="#">Anchor button</a>
+      <button class="btn--danger">Button element</button>
+      <input class="btn--danger" type="submit" value="submit input">
+      <input class="btn--danger" type="button" value="button input">
+    </div>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><!-- Standard buttons -->
+<a class="button" href="#">Anchor button</a>
+<button>Button element</button>
+<input type="submit" value="submit input">
+<input type="button" value="button input">
+
+<!-- Primary buttons -->
+<a class="button btn--primary" href="#">Anchor button</a>
+<button class="btn--primary">Button element</button>
+<input class="btn--primary" type="submit" value="submit input">
+<input class="btn--primary" type="button" value="button input">
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+
+    <!-- Forms -->
+<div class="docs-section" id="forms">
+  <h6 class="docs-header">Forms</h6>
+  <p>Forms are a huge pain, but hopefully these styles make it a bit easier. All inputs, select, and buttons are normalized for a common height cross-browser so inputs can be stacked or placed alongside each other.</p>
+  <div class="docs-example docs-example-forms">
+    <form>
+      <div class="row">
+        <div class="six columns">
+          <label for="exampleEmailInput">Your email</label>
+          <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
+        </div>
+        <div class="six columns">
+          <label for="exampleRecipientInput">Reason for contacting</label>
+          <select class="u-full-width" id="exampleRecipientInput">
+            <option value="Option 1">Questions</option>
+            <option value="Option 2">Admiration</option>
+            <option value="Option 3">Can I get your number?</option>
+          </select>
+        </div>
+      </div>
+      <label for="exampleMessage">Message</label>
+      <textarea class="u-full-width" placeholder="Hi Dave &hellip;" id="exampleMessage"></textarea>
+      <label class="example-send-yourself-copy">
+        <input type="checkbox">
+        <span class="label--body">Send a copy to yourself</span>
+      </label>
+      <input class="btn--primary" type="submit" value="Submit">
+    </form>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><!-- The above form looks like this -->
+<form>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleEmailInput">Your email</label>
+      <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
+    </div>
+    <div class="six columns">
+      <label for="exampleRecipientInput">Reason for contacting</label>
+      <select class="u-full-width" id="exampleRecipientInput">
+        <option value="Option 1">Questions</option>
+        <option value="Option 2">Admiration</option>
+        <option value="Option 3">Can I get your number?</option>
+      </select>
+    </div>
+  </div>
+  <label for="exampleMessage">Message</label>
+  <textarea class="u-full-width" placeholder="Hi Dave &hellip;" id="exampleMessage"></textarea>
+  <label class="example-send-yourself-copy">
+    <input type="checkbox">
+    <span class="label--body">Send a copy to yourself</span>
+  </label>
+  <input class="btn--primary" type="submit" value="Submit">
+</form>
+
+<!-- Always wrap checkbox and radio inputs in a label and use a <span class="label--body"> inside of it -->
+
+<!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+    <!-- Lists -->
+<div class="docs-section" id="lists">
+  <h6 class="docs-header">Lists</h6>
+  <div class="row docs-example">
+    <div class="six columns">
+      <ul>
+        <li>Unordered lists have basic styles</li>
+        <li>
+          They use the circle list style
+          <ul>
+            <li>Nested lists styled to feel right</li>
+            <li>Can nest either type of list into the other</li>
+          </ul>
+        </li>
+        <li>Just more list items mama san</li>
+      </ul>
+    </div>
+    <div class="six columns">
+      <ol>
+        <li>Ordered lists also have basic styles</li>
+        <li>
+          They use the decimal list style
+          <ul>
+            <li>Ordered and unordered can be nested</li>
+            <li>Can nest either type of list into the other</li>
+          </ul>
+        </li>
+        <li>Last list item just for the fun</li>
+      </ol>
+    </div>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><ul>
+  <li>Item 1</li>
+  <li>
+    Item 2
+    <ul>
+      <li>Item 2.1</li>
+      <li>Item 2.2</li>
+    </ul>
+  </li>
+  <li>Item 3</li>
+</ul>
+
+<!-- Easily substitute any <ul> or an <ol> to get number lists or sublists. Skeletor doesn't support lists nested deeper than 2 levels -->
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+    <!-- Tables -->
+<div class="docs-section" id="tables">
+  <h6 class="docs-header">Tables</h6>
+  <p>Be sure to use properly formed table markup with <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> when building a <code>table</code>.</p>
+  <div class="docs-example">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Sex</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dave Gamache</td>
+          <td>26</td>
+          <td>Male</td>
+          <td>San Francisco</td>
+        </tr>
+        <tr>
+          <td>Dwayne Johnson</td>
+          <td>42</td>
+          <td>Male</td>
+          <td>Hayward</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dave Gamache</td>
+      <td>26</td>
+      <td>Male</td>
+      <td>San Francisco</td>
+    </tr>
+    <tr>
+      <td>Dwayne Johnson</td>
+      <td>42</td>
+      <td>Male</td>
+      <td>Hayward</td>
+    </tr>
+  </tbody>
+</table>
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+    <!-- Queries -->
+<div class="docs-section" id="queries">
+  <h6 class="docs-header">Media queries</h6>
+  <p>Skeletor uses media queries to serve its scalable grid, but also has a list of queries for convenience of styling your site across devices. The queries are mobile-first, meaning they target <code>min-width</code>. Mobile-first queries are how Skeletor's grid is built and is the preferrable method of organizing CSS. It means all styles outside of a query apply to all devices, then larger devices are targeted for enhancement. This prevents small devices from having to parse tons of unused CSS. The sizes for the queries are:</p>
+  <div class="docs-example row">
+    <div class="six columns">
+      <ul>
+        <li><strong>Desktop HD</strong>: 1200px</li>
+        <li><strong>Desktop</strong>: 1000px</li>
+        <li><strong>Tablet</strong>: 750px</li>
+      </ul>
+    </div>
+    <div class="six columns">
+      <ul>
+        <li><strong>Phablet</strong>: 550px</li>
+        <li><strong>Mobile</strong>: 400px</li>
+      </ul>
+    </div>
+  </div>
+
+
+<!-- CODE EXAMPLE END Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint">/* Mobile first queries */
+
+/* Larger than mobile */
+@media (min-width: $xs) {}
+
+/* Larger than phablet */
+@media (min-width: $sm) {}
+
+/* Larger than tablet */
+@media (min-width: $md) {}
+
+/* Larger than desktop */
+@media (min-width: $lg) {}
+
+/* Larger than Desktop HD */
+@media (min-width: $xl) {}
+
+
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+    <!-- Utilities and Misc. -->
+<div class="docs-section" id="utilities">
+  <h6 class="docs-header">Utilities</h6>
+  <p>Skeletor has a number of small utility classes that act as easy-to-use helpers. Sometimes it's better to use a utility class than create a whole new class just to float an element.</p>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint">/* Utility Classes */
+
+/* Make element full width */
+.u-full-width
+
+/* Make sure elements don't run outside containers (great for images in columns) */
+.u-max-full-width
+
+/* Float either direction */
+.u-pull-right
+.u-pull-left
+
+/* Text alignment */
+.u-text-center {
+.u-text-left
+.u-text-right
+
+/* Clear a float */
+.u-cf
+
+/* Vertically center anything */
+%u-vertical-align
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+    <!-- Code -->
+<div class="docs-section" id="code">
+  <h6 class="docs-header">Code</h6>
+    <p>Code styling is kept basic – just wrap anything in a <code>&lt;code&gt;</code> and it will appear like <code>this</code>. For blocks of code, wrap a <code>&lt;code&gt;</code> within a <code>&lt;pre&gt;</code>.</p>
+
+<div class="docs-example">
+<pre><code>.some-class {
+  background-color: red;
+}</code></pre>
+</div>
+
+
+<!-- Code Example -->
+<pre class="code-example">
+<code class="code-example-body prettyprint"><pre><code>.some-class {
+  background-color: red;
+}</code></pre>
+
+<!-- Remember every whitespace and break will be preserved in a <pre>, including indentation in your code -->
+</code>
+</pre>
+<!-- END Code Example -->
+
+</div>
+
+    <!-- Linting -->
+<div class="docs-section" id="linting">
+  <h6 class="docs-header">Linting</h6>
+  <p>The ultimate goal is to have a codebase which looks like the same person wrote it. The reasoning behind this is to promote readable and consistent coding styles. It makes code easier to read, allows all developers to understand the intent behind it, and makes refactoring easier.</p>
+
+  <p><a href="https://github.com/causes/scss-lint">scss-lint</a> helps automate this process and outputs any problems with your SCSS, including the offending filename and line number (if available).</p>
+
+  <p>The rules of linting are defined in <code>scss-lint.yml</code> file. Should you want to customize the checks run against your code, you can do so by editing this file. You can see the list of all available options in the <a href="https://github.com/causes/scss-lint/blob/master/config/default.yml">default configuration file</a>. Refer to to the <a href="https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md">linters documentation</a> for more information.</p>
+
+</div>
+
+    <!-- CSS Stats -->
+<div class="docs-section" id="cssstats">
+  <h6 class="docs-header">CSS Stats</h6>
+  <p><a href="https://www.npmjs.com/package/cssstats">cssstats</a> parses the compiled CSS stylesheet and returns an object with statistics. These are high-level stats which help you analyse the performance and maintainability of your code. It helps you avoid bloat, catch redundant rules, and keep a low average specificity of selectors.</p>
+
+  <p>The visualization of these stats are available at <a href="/css/stats">/css/stats</a>. The visualization is based on CSS Stats by <a href="http://mrmrs.cc" class="bold dark-gray">Mrmrs</a> &amp; <a href="http://jxnblk.com" class="bold dark-gray">Jxnblk</a>.</p>
+
+  <ul>
+    <li><a href="http://webdesign.tutsplus.com/tutorials/understanding-css-stats-how-to-make-the-most-of-the-numbers--cms-22756">Understanding CSS Stats: How to Make the Most of the Numbers</a></li>
+    <li><a href="http://csswizardry.com/2014/10/the-specificity-graph">The Specificity Graph</a></li>
+  </ul>
+</div>
+
+
+  </div>
+
+  <!-- scripts -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <script src="js/docs.js"></script>
+</body>
+</html>
