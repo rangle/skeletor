@@ -14,7 +14,7 @@ html {
 
 body {
   background-color: $body-bg;
-  color: $body-colour;
+  color: $body-color;
   font-family: $body-font;
   // currently ems cause chrome bug misinterpreting rems on body element
   font-size: 1.5em;
@@ -24,10 +24,10 @@ body {
 
 
 a {
-  color: $anchor-colour;
+  color: $anchor-color;
 
   &:hover {
-    color: $anchor-colour-hover;
+    color: $anchor-color-hover;
   }
 }
 
